@@ -368,6 +368,19 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
 .tag-badge{background:var(--bd);color:var(--blue);padding:2px 8px;border-radius:4px;font-weight:600;}
 
 
+
+/* ── BACKUP MODAL ── */
+.backup-modal-btn{display:flex;align-items:center;gap:10px;width:100%;padding:14px 16px;border-radius:10px;font-size:14px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;border:1px solid var(--border);background:var(--input-bg);color:var(--text);margin-bottom:10px;transition:all .2s;}
+.backup-modal-btn:hover{background:var(--panel);}
+.backup-modal-btn.green{border-color:rgba(0,214,143,0.4);background:rgba(0,214,143,0.08);color:var(--green);}
+.backup-modal-btn.blue{border-color:rgba(74,158,255,0.4);background:rgba(74,158,255,0.08);color:var(--blue);}
+.backup-modal-btn.gold{border-color:rgba(255,187,36,0.4);background:rgba(255,187,36,0.08);color:var(--gold);}
+.backup-modal-btn .bk-icon{font-size:22px;flex-shrink:0;}
+.backup-modal-btn .bk-text{text-align:right;}
+.backup-modal-btn .bk-title{font-size:13px;font-weight:800;}
+.backup-modal-btn .bk-sub{font-size:11px;opacity:.7;font-weight:400;margin-top:2px;}
+.backup-last{font-size:11px;color:var(--dim);text-align:center;margin-top:4px;}
+
 /* ── BACKUP SECTION ── */
 .backup-section{background:rgba(0,214,143,0.05);border:1px solid rgba(0,214,143,0.2);border-radius:8px;padding:14px;margin-bottom:14px;}
 .backup-section-title{font-size:11px;font-weight:800;color:var(--green);margin-bottom:10px;letter-spacing:.5px;}
@@ -403,8 +416,7 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
       <button class="dd-item" onclick="openSettings();closeMenu()"><span class="dd-icon">⚙️</span>הגדרות</button>
       <div class="dd-sep"></div>
       <button class="dd-item" onclick="exportAll();closeMenu()"><span class="dd-icon">📥</span>ייצוא CSV</button>
-      <button class="dd-item" onclick="exportBackup();closeMenu()"><span class="dd-icon">💾</span>גיבוי JSON</button>
-      <button class="dd-item" onclick="document.getElementById('import-input').click();closeMenu()"><span class="dd-icon">📂</span>שחזור גיבוי</button>
+      <button class="dd-item" onclick="openBackupModal();closeMenu()"><span class="dd-icon">💾</span>גיבוי ושחזור</button>
     </div>
   </div>
 </div>
@@ -717,7 +729,7 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
       <div class="backup-section-title">💾 גיבוי מקומי אוטומטי</div>
       <div class="settings-row">
         <span class="settings-lbl">הורד גיבוי כל X עסקאות</span>
-        <input class="settings-input" id="s-auto-backup" type="number" min="0" max="100" step="1" placeholder="5" style="width:70px">
+        <input class="settings-input" id="s-auto-backup" type="number" min="0" max="100" step="1" placeholder="5" style="width:70px" oninput="updateAutoBackupStatus()">
       </div>
       <div class="backup-status" id="auto-backup-status">כבוי (0 = כבוי)</div>
     </div>
@@ -777,6 +789,54 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
     </div>
     <div class="form-error" id="tax-err">נא להזין סכום חיובי</div>
     <button class="tx-save-btn" id="tax-save-btn" onclick="tryTaxSave()" disabled style="background:rgba(255,187,36,0.15);border-color:rgba(255,187,36,0.5);color:var(--gold)">שמור תשלום מס ←</button>
+  </div>
+</div>
+
+
+<!-- BACKUP MODAL -->
+<div id="backup-overlay" class="modal-overlay" onclick="if(event.target===this)closeBackupModal()">
+  <div class="modal-box" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">💾 גיבוי ושחזור</span>
+      <button class="modal-close" onclick="closeBackupModal()">✕</button>
+    </div>
+
+    <div style="margin-bottom:6px;font-size:11px;color:var(--dim);text-align:center" id="backup-last-time"></div>
+
+    <button class="backup-modal-btn green" onclick="doBackup()">
+      <span class="bk-icon">📥</span>
+      <div class="bk-text">
+        <div class="bk-title">גבה עכשיו (JSON)</div>
+        <div class="bk-sub">מוריד קובץ עם כל העסקאות, תנועות ותשלומי מס</div>
+      </div>
+    </button>
+
+    <button class="backup-modal-btn blue" onclick="doRestore()">
+      <span class="bk-icon">📂</span>
+      <div class="bk-text">
+        <div class="bk-title">שחזר מקובץ</div>
+        <div class="bk-sub">בחר קובץ JSON להחזרת הנתונים</div>
+      </div>
+    </button>
+
+    <button class="backup-modal-btn gold" onclick="doExportCSV()">
+      <span class="bk-icon">📊</span>
+      <div class="bk-text">
+        <div class="bk-title">ייצוא CSV לאקסל</div>
+        <div class="bk-sub">מוריד קובץ CSV לפתיחה ב-Excel / Sheets</div>
+      </div>
+    </button>
+
+    <div style="border-top:1px solid var(--border);margin:12px 0;padding-top:12px">
+      <div style="font-size:11px;color:var(--dim);margin-bottom:8px;font-weight:700">☁️ Google Drive</div>
+      <button class="backup-modal-btn" id="backup-drive-btn" onclick="backupToDriveNow()" style="margin-bottom:0">
+        <span class="bk-icon">☁️</span>
+        <div class="bk-text">
+          <div class="bk-title" id="backup-drive-title">גבה ל-Google Drive</div>
+          <div class="bk-sub" id="backup-drive-sub">הגדר Client ID בהגדרות תחילה</div>
+        </div>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -845,10 +905,14 @@ let calYear, calMonth;
 function loadTrades(){try{const r=localStorage.getItem(STORAGE_KEY);if(r){const p=JSON.parse(r);if(Array.isArray(p)&&p.length)return p;}}catch(e){}saveTradesToStorage(SAMPLE_TRADES);return[...SAMPLE_TRADES];}
 function saveTradesToStorage(d){
   try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}catch(e){}
-  // Auto local backup
+  // Auto local backup — trigger every X NEW trades since last backup
   const every=parseInt(settings.autoBackupEvery)||0;
-  if(every>0 && d.length>0 && d.length%every===0){
-    setTimeout(()=>{ triggerAutoBackup(); },300);
+  if(every>0 && d.length>0){
+    const lastCount=parseInt(localStorage.getItem('tradeflow_backup_count')||'0');
+    if(d.length - lastCount >= every){
+      localStorage.setItem('tradeflow_backup_count', String(d.length));
+      setTimeout(()=>{ triggerAutoBackup(); },300);
+    }
   }
 }
 function triggerAutoBackup(){
@@ -860,8 +924,10 @@ function triggerAutoBackup(){
   a.download=`tradeflow-auto-${todayStr()}.json`;
   document.body.appendChild(a);a.click();
   setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},1000);
-  showAutoBackupToast();
-  // Also try Google Drive if connected
+  // Save last backup time
+  const now=new Date().toLocaleString('he-IL');
+  localStorage.setItem('tradeflow_last_backup', now);
+  showToast('💾 גיבוי אוטומטי נשמר!','var(--green)');
   if(gDriveIsConnected()) gDriveUpload(data);
 }
 function showAutoBackupToast(){
@@ -898,7 +964,7 @@ function toggleTheme(){
 
 // ── BACKUP / RESTORE ───────────────────────────────────────────────────
 function exportBackup(){
-  const data={trades,transactions,settings,version:2,exportedAt:new Date().toISOString()};
+  const data={trades,transactions,settings,taxPayments,version:2,exportedAt:new Date().toISOString()};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
   downloadFile(url,`tradeflow_backup_${todayStr()}.json`);
@@ -911,11 +977,13 @@ function importBackup(evt){
     try{
       const data=JSON.parse(e.target.result);
       if(!data.trades||!Array.isArray(data.trades))throw new Error('פורמט לא תקין');
-      if(!confirm(`מצאתי ${data.trades.length} עסקאות ו-${(data.transactions||[]).length} תנועות כספים.\nלשחזר? הנתונים הנוכחיים יוחלפו.`))return;
       trades=data.trades; saveTradesToStorage(trades);
       if(data.transactions){transactions=data.transactions;saveTxToStorage(transactions);}
       if(data.settings){settings=data.settings;saveSettingsToStorage();}
-      renderAll(); alert('✅ שחזור הושלם בהצלחה!');
+      if(data.taxPayments){taxPayments=data.taxPayments;saveTaxPayments();}
+      closeBackupModal();
+      renderAll();
+      showToast('✅ שחזור הושלם — '+data.trades.length+' עסקאות','var(--green)');
     }catch(err){alert('❌ שגיאה בקריאת הקובץ: '+err.message);}
     evt.target.value='';
   };
@@ -1397,13 +1465,86 @@ function renderTagChart(tm){
 // ── PSYCHOLOGY ─────────────────────────────────────────────────────────
 
 
+
+// ── BACKUP MODAL ───────────────────────────────────────────────────────
+function openBackupModal(){
+  // Update last backup time
+  const last=localStorage.getItem('tradeflow_last_backup');
+  const el=document.getElementById('backup-last-time');
+  if(el) el.textContent=last?`גיבוי אחרון: ${last}`:'טרם בוצע גיבוי';
+  // Update Drive button
+  const clientId=localStorage.getItem(GDRIVE_KEY)||'';
+  const driveTitle=document.getElementById('backup-drive-title');
+  const driveSub=document.getElementById('backup-drive-sub');
+  const driveBtn=document.getElementById('backup-drive-btn');
+  if(clientId&&gDriveIsConnected()){
+    if(driveTitle) driveTitle.textContent='גבה ל-Google Drive';
+    if(driveSub) driveSub.textContent='מחובר — לחץ להעלאה';
+    if(driveBtn){driveBtn.style.borderColor='rgba(0,214,143,0.4)';driveBtn.style.background='rgba(0,214,143,0.08)';}
+  } else if(clientId){
+    if(driveTitle) driveTitle.textContent='התחבר ל-Google Drive';
+    if(driveSub) driveSub.textContent='לחץ להתחברות ואז גיבוי';
+  } else {
+    if(driveTitle) driveTitle.textContent='Google Drive לא מוגדר';
+    if(driveSub) driveSub.textContent='הגדר Client ID בהגדרות';
+  }
+  document.getElementById('backup-overlay').classList.add('open');
+}
+function closeBackupModal(){document.getElementById('backup-overlay').classList.remove('open');}
+
+function doBackup(){
+  exportBackup();
+  const now=new Date().toLocaleString('he-IL');
+  localStorage.setItem('tradeflow_last_backup', now);
+  const el=document.getElementById('backup-last-time');
+  if(el) el.textContent=`גיבוי אחרון: ${now}`;
+  showToast('💾 גיבוי הורד בהצלחה!','var(--green)');
+}
+
+function doRestore(){
+  document.getElementById('import-input').click();
+}
+
+function doExportCSV(){
+  exportAll();
+  showToast('📊 CSV ייוצא בהצלחה!','var(--blue)');
+}
+
+async function backupToDriveNow(){
+  const clientId=localStorage.getItem(GDRIVE_KEY)||'';
+  if(!clientId){closeBackupModal();openSettings();return;}
+  if(!gDriveIsConnected()){gDriveAuth();return;}
+  const btn=document.getElementById('backup-drive-btn');
+  const title=document.getElementById('backup-drive-title');
+  if(title) title.textContent='⏳ מעלה...';
+  if(btn) btn.disabled=true;
+  await gDriveUpload(buildBackupData());
+  if(title) title.textContent='✅ הועלה בהצלחה!';
+  showToast('☁️ הגיבוי עלה ל-Drive!','var(--green)');
+  setTimeout(()=>{
+    if(title) title.textContent='גבה ל-Google Drive';
+    if(btn) btn.disabled=false;
+  },3000);
+}
+
+function showToast(msg, color='var(--green)'){
+  const t=document.getElementById('auto-backup-toast');
+  if(!t)return;
+  t.textContent=msg;
+  t.style.borderColor=color;
+  t.style.color=color;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
 // ── AUTO BACKUP ────────────────────────────────────────────────────────
 function updateAutoBackupStatus(){
-  const every=parseInt(document.getElementById('s-auto-backup').value)||0;
+  const inp=document.getElementById('s-auto-backup');
+  const every=inp?parseInt(inp.value)||0:parseInt(settings.autoBackupEvery)||0;
   const el=document.getElementById('auto-backup-status');
   if(!el)return;
-  if(every===0){el.textContent='כבוי';el.className='backup-status';}
-  else{el.textContent=`✓ פעיל — גיבוי כל ${every} עסקאות`;el.className='backup-status ok';}
+  if(every===0){el.textContent='כבוי — הכנס מספר להפעלה';el.className='backup-status';}
+  else{el.textContent=`✓ פעיל — גיבוי אוטומטי כל ${every} עסקאות`;el.className='backup-status ok';}
 }
 
 // ── GOOGLE DRIVE ────────────────────────────────────────────────────────
