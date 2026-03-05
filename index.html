@@ -902,7 +902,7 @@ let calYear, calMonth;
 (()=>{ const n=new Date(); calYear=n.getFullYear(); calMonth=n.getMonth(); })();
 
 // ── PERSISTENCE ────────────────────────────────────────────────────────
-function loadTrades(){try{const r=localStorage.getItem(STORAGE_KEY);if(r){const p=JSON.parse(r);if(Array.isArray(p)&&p.length)return p;}}catch(e){}saveTradesToStorage(SAMPLE_TRADES);return[...SAMPLE_TRADES];}
+function loadTrades(){try{const r=localStorage.getItem(STORAGE_KEY);if(r){const p=JSON.parse(r);if(Array.isArray(p))return p;}}catch(e){}return[];}
 function saveTradesToStorage(d){
   try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}catch(e){}
   // Auto local backup — trigger every X NEW trades since last backup
@@ -1726,11 +1726,15 @@ async function generateAIInsights(){
       })
     });
     const data=await res.json();
+    // Handle API errors
+    if(data.error){throw new Error(data.error.message||'API error');}
+    if(!data.content||!Array.isArray(data.content)){throw new Error('תשובה לא תקינה מה-API. בדוק שהמפתח תקין.');}
     const raw=data.content.map(b=>b.text||'').join('');
     const clean=raw.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(clean);
+    let parsed;
+    try{parsed=JSON.parse(clean);}catch(e){throw new Error('שגיאה בפענוח התשובה — נסה שוב');}
     const insights=parsed.insights||[];
-    if(!insights.length)throw new Error('empty');
+    if(!insights.length)throw new Error('אין תובנות — נסה שוב');
 
     content.innerHTML=`<div class="ai-insights-grid">${
       insights.map(i=>`<div class="ai-insight-card ${i.type}">
