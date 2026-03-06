@@ -75,9 +75,6 @@ body{background:var(--bg);color:var(--text);font-family:'Assistant',sans-serif;d
 /* ── GLOBAL TIME FILTER ── */
 #gfilter-bar{background:var(--header-bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;padding:7px 14px;overflow-x:auto;-webkit-overflow-scrolling:touch;position:sticky;top:108px;z-index:48;}
 
-
-
-
 /* ── CONTENT ── */
 #content{max-width:1200px;margin:0 auto;padding:12px 12px 100px;width:100%;}
 .page{display:none;}.page.on{display:block;padding-bottom:120px;}
@@ -124,9 +121,10 @@ body{background:var(--bg);color:var(--text);font-family:'Assistant',sans-serif;d
 
 /* ── EQUITY ── */
 .equity-wrap{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:12px;}
-.equity-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
-.equity-lbl{color:var(--dim);font-size:12px;}.equity-val{font-family:monospace;font-weight:700;font-size:14px;}
-.equity-legend{display:flex;gap:12px;font-size:10px;color:var(--dim);}
+.equity-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+.equity-lbl{color:var(--dim);font-size:12px;font-weight:600;}
+.equity-val{font-family:monospace;font-weight:800;font-size:18px;}
+.equity-legend{display:flex;gap:12px;font-size:10px;color:var(--dim);margin-top:4px;}
 .eq-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:4px;}
 
 /* ── CALENDAR HEATMAP PRO ── */
@@ -138,9 +136,6 @@ body{background:var(--bg);color:var(--text);font-family:'Assistant',sans-serif;d
 .cal-date-num { position: absolute; top: 4px; right: 6px; font-size: 11px; color: var(--mid); opacity: 0.8; font-family: sans-serif; }
 .cal-pnl { font-size: 13px; font-weight: 800; font-family: monospace; margin-top: 8px; }
 .cal-pnl.sm { font-size: 11px; }
-
-
-
 
 .api-key-section{background:rgba(74,158,255,0.06);border:1px solid rgba(74,158,255,0.2);border-radius:8px;padding:14px;margin-bottom:14px;}
 .api-key-label{font-size:11px;color:var(--dim);margin-bottom:6px;line-height:1.5;}
@@ -363,11 +358,7 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
 
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-bottom:20px;}
 
-
-
 .tag-badge{background:var(--bd);color:var(--blue);padding:2px 8px;border-radius:4px;font-weight:600;}
-
-
 
 /* ── BACKUP MODAL ── */
 .backup-modal-btn{display:flex;align-items:center;gap:10px;width:100%;padding:14px 16px;border-radius:10px;font-size:14px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;border:1px solid var(--border);background:var(--input-bg);color:var(--text);margin-bottom:10px;transition:all .2s;}
@@ -387,12 +378,98 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
 .backup-status{font-size:11px;margin-top:8px;color:var(--dim);}
 .backup-status.ok{color:var(--green);}
 .backup-status.error{color:var(--red);}
-.gdrive-btn{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;margin-top:8px;}
-.gdrive-btn:hover{background:rgba(255,255,255,0.1);}
-.gdrive-btn.connected{border-color:rgba(0,214,143,0.4);background:rgba(0,214,143,0.08);}
+
 .auto-backup-toast{position:fixed;bottom:80px;right:50%;transform:translateX(50%);background:var(--panel);border:1px solid var(--green);border-radius:8px;padding:10px 18px;font-size:12px;color:var(--green);z-index:200;display:none;box-shadow:0 4px 20px rgba(0,0,0,0.4);}
 .auto-backup-toast.show{display:block;animation:toastIn .3s ease;}
 @keyframes toastIn{from{opacity:0;transform:translateX(50%) translateY(10px);}to{opacity:1;transform:translateX(50%) translateY(0);}}
+
+/* ── UTILITY CLASSES (Separation of Concerns) ── */
+
+.text-neutral{color:var(--dim)!important;}
+
+.bg-profit{background:var(--gd)!important;border-color:rgba(0,214,143,0.3)!important;}
+.bg-loss{background:var(--rd)!important;border-color:rgba(255,61,90,0.3)!important;}
+.cal-today{box-shadow:0 0 0 2px var(--blue)!important;}
+.cal-day-profit{background:var(--gd);color:var(--green);border:1px solid rgba(0,214,143,0.3);cursor:pointer;}
+.cal-day-loss{background:var(--rd);color:var(--red);border:1px solid rgba(255,61,90,0.3);cursor:pointer;}
+
+.pnl-positive{color:var(--green);}
+.pnl-negative{color:var(--red);}
+.toast-profit{border-color:var(--green)!important;color:var(--green)!important;}
+
+.toast-info{border-color:var(--blue)!important;color:var(--blue)!important;}
+
+/* ── JSONBIN SYNC ── */
+.sync-indicator{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--dim);padding:4px 10px;border-radius:20px;background:var(--input-bg);border:1px solid var(--border);cursor:pointer;transition:all .2s;flex-shrink:0;}
+.sync-indicator:hover{border-color:var(--blue);}
+.sync-dot{width:8px;height:8px;border-radius:50%;background:var(--dim);flex-shrink:0;transition:background .3s;}
+.sync-dot.synced{background:var(--green);box-shadow:0 0 6px rgba(0,214,143,0.5);}
+.sync-dot.syncing{background:var(--gold);animation:syncPulse 1s ease-in-out infinite;}
+.sync-dot.error{background:var(--red);}
+@keyframes syncPulse{0%,100%{opacity:.4;}50%{opacity:1;}}
+.jsonbin-section{background:rgba(74,158,255,0.05);border:1px solid rgba(74,158,255,0.2);border-radius:8px;padding:14px;margin-bottom:14px;}
+.jsonbin-section-title{font-size:11px;font-weight:800;color:var(--blue);margin-bottom:10px;letter-spacing:.5px;}
+.jsonbin-input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;color:var(--text);font-size:12px;font-family:monospace;outline:none;margin-bottom:8px;box-sizing:border-box;}
+.jsonbin-input:focus{border-color:var(--blue);}
+.jsonbin-status{font-size:10px;margin-top:6px;}
+.jsonbin-status.ok{color:var(--green);}
+.jsonbin-status.err{color:var(--red);}
+.jsonbin-sync-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;border-radius:8px;border:1px solid rgba(74,158,255,0.4);background:rgba(74,158,255,0.1);color:var(--blue);font-size:13px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;margin-top:8px;transition:all .2s;}
+.jsonbin-sync-btn:hover{background:rgba(74,158,255,0.2);}
+.jsonbin-sync-btn:disabled{opacity:.5;cursor:not-allowed;}
+
+
+/* ── PERIOD COMPARISON ── */
+.compare-wrap{margin-bottom:4px;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.compare-col{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px;}
+.compare-col.current{border-color:rgba(74,158,255,0.3);background:rgba(74,158,255,0.05);}
+.compare-col.previous{border-color:rgba(107,122,154,0.3);}
+.compare-col-title{font-size:10px;font-weight:700;color:var(--dim);margin-bottom:10px;letter-spacing:.5px;text-align:center;}
+.compare-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.compare-stat:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.compare-stat-lbl{font-size:11px;color:var(--dim);}
+.compare-stat-val{font-size:12px;font-weight:700;font-family:monospace;}
+.compare-delta-row{background:var(--input-bg);border-radius:8px;padding:10px 12px;margin-bottom:10px;}
+.compare-delta-title{font-size:10px;color:var(--dim);margin-bottom:8px;font-weight:700;}
+.compare-delta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.compare-delta-item{text-align:center;}
+.compare-delta-lbl{font-size:9px;color:var(--dim);margin-bottom:3px;}
+.compare-delta-val{font-size:13px;font-weight:800;font-family:monospace;}
+.compare-delta-val.up{color:var(--green);}
+.compare-delta-val.down{color:var(--red);}
+.compare-delta-val.neutral{color:var(--dim);}
+.compare-period-btns{display:flex;gap:6px;margin-bottom:10px;}
+.compare-period-btn{flex:1;padding:7px;border-radius:7px;border:1px solid var(--border);background:var(--input-bg);color:var(--dim);font-size:11px;font-weight:700;font-family:'Assistant',sans-serif;cursor:pointer;}
+.compare-period-btn.on{border-color:var(--blue);background:rgba(74,158,255,0.12);color:var(--blue);}
+
+
+/* ── HOUR CHART ── */
+.hour-chart-wrap{padding:4px 0;}
+.hour-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;height:28px;}
+.hour-bar-label{width:38px;font-size:11px;font-family:monospace;color:var(--dim);text-align:right;flex-shrink:0;}
+.hour-bar-track{flex:1;height:18px;background:var(--input-bg);border-radius:4px;overflow:hidden;position:relative;}
+.hour-bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 6px;font-size:10px;font-weight:700;color:#fff;white-space:nowrap;transition:width .4s ease;min-width:2px;}
+.hour-bar-fill.positive{background:linear-gradient(90deg,rgba(0,214,143,0.8),rgba(0,214,143,0.5));}
+.hour-bar-fill.negative{background:linear-gradient(90deg,rgba(255,61,90,0.8),rgba(255,61,90,0.5));margin-left:auto;}
+.hour-bar-fill.best{background:linear-gradient(90deg,#00d68f,#00b377);box-shadow:0 0 8px rgba(0,214,143,0.4);}
+.hour-bar-fill.worst{background:linear-gradient(90deg,#ff3d5a,#cc2040);}
+.hour-bar-meta{width:70px;font-size:10px;color:var(--dim);text-align:left;flex-shrink:0;}
+.hour-bar-meta .cnt{font-size:9px;}
+.hour-chart-legend{display:flex;gap:12px;font-size:10px;color:var(--dim);margin-bottom:8px;padding:0 4px;}
+
+
+/* ── AI TRADE ANALYSIS ── */
+.ai-trade-btn{background:rgba(74,158,255,0.1);border:1px solid rgba(74,158,255,0.3);border-radius:6px;padding:4px 8px;font-size:11px;color:var(--blue);cursor:pointer;font-family:'Assistant',sans-serif;white-space:nowrap;}
+.ai-trade-btn:hover{background:rgba(74,158,255,0.2);}
+.ai-trade-result{margin-top:10px;padding:10px 12px;background:rgba(74,158,255,0.06);border:1px solid rgba(74,158,255,0.2);border-radius:8px;font-size:12px;line-height:1.6;color:var(--text);}
+.ai-trade-result .ai-tr-header{font-size:10px;color:var(--blue);font-weight:700;margin-bottom:6px;}
+.ai-trade-result .ai-tr-loading{color:var(--dim);font-style:italic;}
+.ai-trade-result .ai-tr-score{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;margin-bottom:6px;}
+.ai-trade-result .ai-tr-score.good{background:rgba(0,214,143,0.15);color:var(--green);}
+.ai-trade-result .ai-tr-score.bad{background:rgba(255,61,90,0.15);color:var(--red);}
+.ai-trade-result .ai-tr-score.ok{background:rgba(255,187,36,0.15);color:var(--gold);}
+
 </style>
 </head>
 <body>
@@ -423,11 +500,17 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
 
 <!-- SUB-BAR: PnL + Add Button -->
 <div id="sub-bar">
-  <div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <button id="add-btn" onclick="openModal()">+ הוסף עסקה</button>
+    <div class="sync-indicator" id="sync-indicator" onclick="manualSync()" title="לחץ לסנכרון ידני">
+      <div class="sync-dot" id="sync-dot"></div>
+      <span id="sync-label">ענן</span>
+    </div>
+  </div>
+  <div style="text-align:right">
     <div id="sub-pnl-amt">+$0.00</div>
     <div id="sub-pnl-lbl">סך רווח/הפסד — הכל</div>
   </div>
-  <button id="add-btn" onclick="openModal()">+ הוסף עסקה</button>
 </div>
 
 <!-- BOTTOM NAV -->
@@ -485,14 +568,13 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
         <div>
           <span class="equity-lbl">עקומת חשבון אמיתית</span>
           <div class="equity-legend">
-            <span><span class="eq-dot" style="background:var(--blue)"></span>יתרת חשבון</span>
             <span><span class="eq-dot" style="background:var(--green)"></span>PnL מצטבר</span>
           </div>
         </div>
         <span class="equity-val" id="eq-val">$0.00</span>
       </div>
-      <svg id="eq-svg" viewBox="0 0 800 150" preserveAspectRatio="none" height="150">
-        <text x="400" y="80" text-anchor="middle" fill="#6b7a9a" font-size="14" font-family="Assistant">הוסף עסקאות לראות את הגרף</text>
+      <svg id="eq-svg" viewBox="0 0 800 200" preserveAspectRatio="none" style="width:100%;height:180px;display:block;">
+        <text x="400" y="100" text-anchor="middle" fill="#6b7a9a" font-size="14" font-family="Assistant">הוסף עסקאות לראות את הגרף</text>
       </svg>
     </div>
     <!-- STRATEGY ANALYTICS -->
@@ -549,6 +631,26 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
 
   <!-- STATISTICS -->
   <div id="page-stat" class="page">
+    <!-- PERIOD COMPARISON -->
+    <div class="acc-header" onclick="toggleAcc('acc-compare')"><span>📊 השוואת תקופות</span><span class="acc-arrow" id="arr-acc-compare">▲</span></div>
+    <div class="acc-body" id="acc-compare">
+      <div class="compare-wrap">
+        <div class="compare-period-btns">
+          <button class="compare-period-btn on" id="cmp-week-btn" onclick="setComparePeriod('week')">שבוע</button>
+          <button class="compare-period-btn" id="cmp-month-btn" onclick="setComparePeriod('month')">חודש</button>
+          <button class="compare-period-btn" id="cmp-quarter-btn" onclick="setComparePeriod('quarter')">רבעון</button>
+        </div>
+        <div class="compare-grid">
+          <div class="compare-col current" id="cmp-current"></div>
+          <div class="compare-col previous" id="cmp-previous"></div>
+        </div>
+        <div class="compare-delta-row">
+          <div class="compare-delta-title">📈 שינוי יחסי</div>
+          <div class="compare-delta-grid" id="cmp-delta"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="acc-header" onclick="toggleAcc('acc-month')"><span>📅 ביצועים לפי חודש</span><span class="acc-arrow" id="arr-acc-month">▲</span></div>
     <div class="acc-body" id="acc-month"><div class="table-wrap"><table>
       <thead><tr><th>חודש</th><th>ימים</th><th>עסקאות</th><th>ניצחונות</th><th>הפסדות</th><th>הצלחה%</th><th>רווח/הפסד</th><th>ממוצע/יום</th></tr></thead>
@@ -561,11 +663,13 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
     </table></div>
     <button class="show-more-btn" id="day-more-btn" onclick="showMoreDays()" style="display:none">הצג עוד ▼</button>
     </div>
-    <div class="acc-header" onclick="toggleAcc('acc-hour')"><span>⏰ ביצועים לפי שעה <span style="font-size:10px;font-weight:400;color:var(--dim)">(ירוק=הכי טוב · אדום=הכי גרוע)</span></span><span class="acc-arrow" id="arr-acc-hour">▲</span></div>
-    <div class="acc-body" id="acc-hour"><div class="table-wrap"><table>
-      <thead><tr><th>שעה</th><th>עסקאות</th><th>ניצחונות</th><th>הפסדות</th><th>הצלחה%</th><th>רווח/הפסד</th><th>פירוט</th></tr></thead>
-      <tbody id="stat-hour"></tbody>
-    </table></div></div>
+    <div class="acc-header" onclick="toggleAcc('acc-hour')"><span>⏰ גרף שעות מסחר</span><span class="acc-arrow" id="arr-acc-hour">▲</span></div>
+    <div class="acc-body" id="acc-hour">
+      <div class="hour-chart-legend">
+        <span>🟢 רווח · 🔴 הפסד · ⭐ שעה הכי טובה · ☠ שעה הכי גרועה</span>
+      </div>
+      <div class="hour-chart-wrap" id="hour-chart"></div>
+    </div>
     <div class="acc-header" onclick="toggleAcc('acc-tag')"><span>🏷️ ביצועים לפי תגית</span><span class="acc-arrow" id="arr-acc-tag">▲</span></div>
     <div class="acc-body" id="acc-tag" style="margin-bottom:24px"><div class="equity-wrap" style="padding:12px 0;margin-bottom:0"><div id="tag-chart"></div></div></div>
   </div>
@@ -733,18 +837,16 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
       </div>
       <div class="backup-status" id="auto-backup-status">כבוי (0 = כבוי)</div>
     </div>
-    <div class="backup-section" style="border-color:rgba(74,158,255,0.2);background:rgba(74,158,255,0.05)">
-      <div class="backup-section-title" style="color:var(--blue)">☁️ Google Drive</div>
-      <div class="settings-row">
-        <span class="settings-lbl">Client ID מ-Google Cloud Console</span>
+    <div class="jsonbin-section">
+      <div class="jsonbin-section-title">☁️ גיבוי ענן — JSONBin.io</div>
+      <div style="font-size:10px;color:var(--dim);margin-bottom:10px;line-height:1.5">
+        שירות חינמי ב-<a href="https://jsonbin.io" target="_blank" style="color:var(--blue)">jsonbin.io</a> — הרשם, צור Bin חדש, העתק API Key ו-Bin ID
       </div>
-      <input class="api-key-input" id="s-gdrive-client-id" type="text" placeholder="xxxx.apps.googleusercontent.com" style="width:100%;margin-bottom:8px" oninput="updateGDriveStatus()">
-      <div class="backup-status" id="gdrive-status">לא מוגדר</div>
-      <button class="gdrive-btn" id="gdrive-auth-btn" onclick="gDriveAuth()" style="display:none">
-        <span>🔑</span> התחבר ל-Google Drive
-      </button>
-      <button class="gdrive-btn connected" id="gdrive-backup-now-btn" onclick="gDriveBackupNow()" style="display:none">
-        <span>☁️</span> גבה עכשיו ל-Drive
+      <input class="jsonbin-input" id="s-jsonbin-key" type="password" placeholder="$2b$10$... (API Key)">
+      <input class="jsonbin-input" id="s-jsonbin-bin" type="text" placeholder="Bin ID (64 תווים)">
+      <div class="jsonbin-status" id="jsonbin-settings-status">לא מוגדר</div>
+      <button class="jsonbin-sync-btn" id="settings-sync-btn" onclick="manualSync()">
+        <span>☁️</span> סנכרן עכשיו
       </button>
     </div>
     <button class="settings-save-btn" onclick="saveSettings()">שמור הגדרות ✓</button>
@@ -766,7 +868,6 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
     </table></div>
   </div>
 </div>
-
 
 <!-- TAX PAYMENT MODAL -->
 <div id="tax-overlay" class="modal-overlay" onclick="if(event.target===this)closeTaxModal()">
@@ -791,7 +892,6 @@ tr.hour-worst td{background:rgba(255,61,90,0.07);}
     <button class="tx-save-btn" id="tax-save-btn" onclick="tryTaxSave()" disabled style="background:rgba(255,187,36,0.15);border-color:rgba(255,187,36,0.5);color:var(--gold)">שמור תשלום מס ←</button>
   </div>
 </div>
-
 
 <!-- BACKUP MODAL -->
 <div id="backup-overlay" class="modal-overlay" onclick="if(event.target===this)closeBackupModal()">
@@ -870,7 +970,9 @@ const SETTINGS_KEY = 'tradeflow_settings_v1';
 const WALLET_KEY   = 'tradeflow_wallet_v1';
 const TAX_KEY      = 'tradeflow_tax_v1';
 const API_KEY_KEY  = 'tradeflow_apikey_v1';
-const GDRIVE_KEY   = 'tradeflow_gdrive_v1';
+const JSONBIN_KEY_K = 'tradeflow_jsonbin_key';
+const JSONBIN_BIN_K = 'tradeflow_jsonbin_bin';
+const JSONBIN_SYNC_K = 'tradeflow_last_sync';
 const THEME_KEY    = 'tradeflow_theme_v1';
 const DAYS_PER_PAGE = 10;
 const TAX_RATE = 0.25;
@@ -905,6 +1007,7 @@ let calYear, calMonth;
 function loadTrades(){try{const r=localStorage.getItem(STORAGE_KEY);if(r){const p=JSON.parse(r);if(Array.isArray(p))return p;}}catch(e){}return[];}
 function saveTradesToStorage(d){
   try{localStorage.setItem(STORAGE_KEY,JSON.stringify(d));}catch(e){}
+  scheduleSynce();
   // Auto local backup — trigger every X NEW trades since last backup
   const every=parseInt(settings.autoBackupEvery)||0;
   if(every>0 && d.length>0){
@@ -945,7 +1048,7 @@ function buildBackupData(){
 function loadSettings(){try{const r=localStorage.getItem(SETTINGS_KEY);if(r)return JSON.parse(r);}catch(e){}return{maxLoss:null,dailyGoal:null,warnPct:70};}
 function saveSettingsToStorage(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(e){}}
 function loadTransactions(){try{const r=localStorage.getItem(WALLET_KEY);if(r){const p=JSON.parse(r);if(Array.isArray(p))return p;}}catch(e){}const s=[{id:1,type:'הפקדה',amount:5000,date:'2025-02-01',notes:'הפקדה ראשונית'},{id:2,type:'הפקדה',amount:3000,date:'2025-02-08',notes:'הפקדה נוספת'}];saveTxToStorage(s);return s;}
-function saveTxToStorage(d){try{localStorage.setItem(WALLET_KEY,JSON.stringify(d));}catch(e){}}
+function saveTxToStorage(d){try{localStorage.setItem(WALLET_KEY,JSON.stringify(d));}catch(e){}scheduleSynce();}
 function loadTaxPayments(){try{const r=localStorage.getItem(TAX_KEY);if(r){const p=JSON.parse(r);if(Array.isArray(p))return p;}}catch(e){}return[];}
 function saveTaxPayments(){try{localStorage.setItem(TAX_KEY,JSON.stringify(taxPayments));}catch(e){}}
 
@@ -983,7 +1086,7 @@ function importBackup(evt){
       if(data.taxPayments){taxPayments=data.taxPayments;saveTaxPayments();}
       closeBackupModal();
       renderAll();
-      showToast('✅ שחזור הושלם — '+data.trades.length+' עסקאות','var(--green)');
+      showToast('✅ שחזור הושלם — '+data.trades.length+' עסקאות','profit');
     }catch(err){alert('❌ שגיאה בקריאת הקובץ: '+err.message);}
     evt.target.value='';
   };
@@ -1010,6 +1113,17 @@ function colorOf(n){return n>=0?'var(--green)':'var(--red)';}
 function classOf(n){return n>=0?'g':'r';}
 
 // ── SAFE MATH ──────────────────────────────────────────────────────────
+
+// ── FINANCIAL MATH (Floating Point Safe) ───────────────────────────
+// All monetary ops go through cents to avoid 0.1+0.2 drift
+function toCents(v){ return Math.round((parseFloat(v)||0) * 100); }
+function fromCents(c){ return c / 100; }
+function safeAdd(a,b){ return fromCents(toCents(a)+toCents(b)); }
+function safeSub(a,b){ return fromCents(toCents(a)-toCents(b)); }
+function safeMul(a,b){ return fromCents(Math.round((parseFloat(a)||0) * (parseFloat(b)||0) * 10000) / 100); }
+// Safe reduce over array of numbers
+function safeSum(arr){ return fromCents(arr.reduce((s,v)=>s+toCents(v),0)); }
+
 function safeDiv(num,den,fb=0){if(!den||!isFinite(den))return fb;const r=num/den;return isFinite(r)?r:fb;}
 function profitFactor(wins,losses){const tw=wins.reduce((a,t)=>a+t.pnl,0),tl=Math.abs(losses.reduce((a,t)=>a+t.pnl,0));if(!tl)return losses.length===0?'MAX':'∞';return safeDiv(tw,tl,0).toFixed(2);}
 function riskReward(wins,losses){if(!wins.length||!losses.length)return'—';const aw=safeDiv(wins.reduce((a,t)=>a+t.pnl,0),wins.length),al=Math.abs(safeDiv(losses.reduce((a,t)=>a+t.pnl,0),losses.length));return al?'1:'+safeDiv(aw,al,0).toFixed(2):'—';}
@@ -1083,14 +1197,14 @@ function renderAll(){renderDash();renderJournal();renderStats();renderPsych();re
 // ── DASHBOARD ──────────────────────────────────────────────────────────
 function renderDash(){
   const ft=filteredTrades();
-  const total=ft.reduce((a,t)=>a+t.pnl,0);
+  let total=0;try{total=safeSum(ft.map(t=>t.pnl));}catch(e){console.error('[renderDash] total',e);}
   const wins=ft.filter(t=>t.pnl>0),losses=ft.filter(t=>t.pnl<=0);
   const days=[...new Set(ft.map(t=>t.date))];
 
-  ['hero-total'].forEach(id=>{const el=document.getElementById(id);el.textContent=fmt(total);el.style.color=colorOf(total);});
-  const subAmt=document.getElementById('sub-pnl-amt');if(subAmt){subAmt.textContent=fmt(total);subAmt.style.color=colorOf(total);}
+  ['hero-total'].forEach(id=>{const el=document.getElementById(id);el.textContent=fmt(total);el.className=el.className.replace(/pnl-positive|pnl-negative/g,'').trim();el.classList.add(total>=0?'pnl-positive':'pnl-negative');});
+  const subAmt=document.getElementById('sub-pnl-amt');if(subAmt){subAmt.textContent=fmt(total);subAmt.className=subAmt.className.replace(/pnl-positive|pnl-negative/g,'').trim();subAmt.classList.add(total>=0?'pnl-positive':'pnl-negative');}
   const subLbl=document.getElementById('sub-pnl-lbl');if(subLbl){const{label}=getGFilterRange();subLbl.textContent='סך רווח/הפסד — '+label;}
-  document.getElementById('hero').style.borderRightColor=colorOf(total);
+  const heroEl=document.getElementById('hero');if(heroEl){heroEl.classList.toggle('bg-profit',total>0);heroEl.classList.toggle('bg-loss',total<0);}
   document.getElementById('hero-sub').textContent=`${ft.length} עסקאות · ${days.length} ימי מסחר · ממוצע ${fmt(safeDiv(total,days.length))} ליום`;
 
   renderWeeklySummary();
@@ -1194,53 +1308,66 @@ function renderRiskBanner(){
 // ── EQUITY CURVE ───────────────────────────────────────────────────────
 function drawEquity(ft){
   const svg=document.getElementById('eq-svg'),val=document.getElementById('eq-val');
-  if(!ft||!ft.length){svg.innerHTML=`<text x="400" y="80" text-anchor="middle" fill="#6b7a9a" font-size="14" font-family="Assistant">הוסף עסקאות לראות את הגרף</text>`;val.textContent='$0.00';val.style.color='var(--dim)';return;}
-  const initDeposit=transactions.filter(t=>t.type==='הפקדה').reduce((a,t)=>a+t.amount,0)-transactions.filter(t=>t.type==='משיכה').reduce((a,t)=>a+t.amount,0);
+  if(!ft||!ft.length){
+    svg.innerHTML='<text x="400" y="100" text-anchor="middle" fill="#6b7a9a" font-size="14" font-family="Assistant">הוסף עסקאות לראות את הגרף</text>';
+    val.textContent='$0.00';val.className='equity-val text-neutral';return;
+  }
+  const initDeposit=safeSum(transactions.filter(t=>t.type==='הפקדה').map(t=>t.amount))
+                   -safeSum(transactions.filter(t=>t.type==='משיכה').map(t=>t.amount));
   const sorted=[...ft].sort((a,b)=>(a.date+a.time<b.date+b.time)?-1:1);
-  let cumPnl=0;const pnlPts=[{x:0,y:0}],balPts=[{x:0,y:initDeposit}];
-  sorted.forEach((t,i)=>{cumPnl+=t.pnl;pnlPts.push({x:i+1,y:cumPnl});balPts.push({x:i+1,y:initDeposit+cumPnl});});
-  const W=800,H=150,P=14;
-  const allY=[...pnlPts,...balPts].map(p=>p.y);
-  const maxY=Math.max(...allY),minY=Math.min(...allY),rng=maxY-minY||1;
-  const tx=x=>P+(x/(pnlPts.length-1||1))*(W-2*P),ty=y=>P+(1-(y-minY)/rng)*(H-2*P);
-  const lastBal=balPts[balPts.length-1].y;
-  val.textContent=fmtAbs(lastBal);val.style.color=colorOf(lastBal-initDeposit);
-  const mkPath=pts=>pts.map((p,j)=>`${j===0?'M':'L'} ${tx(p.x).toFixed(1)} ${ty(p.y).toFixed(1)}`).join(' ');
-  const pathPnl=mkPath(pnlPts),pathBal=mkPath(balPts);
-  const lxB=tx(balPts[balPts.length-1].x).toFixed(1),lyB=ty(lastBal).toFixed(1);
-  const lxP=tx(pnlPts[pnlPts.length-1].x).toFixed(1),lyP=ty(pnlPts[pnlPts.length-1].y).toFixed(1);
-  const grid=[.1,.35,.65,.9].map(r=>{const y=(P+r*(H-2*P)).toFixed(1);return`<line x1="${P}" y1="${y}" x2="${W-P}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;}).join('');
-  const zero=(minY<0&&maxY>0)?`<line x1="${P}" y1="${ty(0).toFixed(1)}" x2="${W-P}" y2="${ty(0).toFixed(1)}" stroke="#6b7a9a" stroke-dasharray="5,4" stroke-width="1" opacity="0.5"/>` :'';
-  const colB='#4a9eff', colP=cumPnl>=0?'#00d68f':'#ff3d5a';
+  let cumPnl=0;
+  const pts=[{x:0,y:0}];
+  sorted.forEach((t,i)=>{cumPnl=safeAdd(cumPnl,t.pnl);pts.push({x:i+1,y:cumPnl});});
+  const W=800,H=200,PX=36,PY=18;
+  const ys=pts.map(p=>p.y);
+  let maxY=Math.max(...ys),minY=Math.min(...ys);
+  const rng=maxY-minY||Math.abs(maxY)||100;
+  maxY+=rng*0.15;minY-=rng*0.15;
+  const totalRng=maxY-minY;
+  const tx=x=>PX+(x/(pts.length-1||1))*(W-2*PX);
+  const ty=y=>PY+(1-(y-minY)/totalRng)*(H-2*PY);
+  const lastPnl=pts[pts.length-1].y;
+  const lastBal=safeAdd(initDeposit,lastPnl);
+  val.textContent=fmtAbs(lastBal);
+  val.className='equity-val '+(lastPnl>=0?'pnl-positive':'pnl-negative');
+  const colP=lastPnl>=0?'#00d68f':'#ff3d5a';
+  const lx=tx(pts.length-1).toFixed(1),ly=ty(lastPnl).toFixed(1);
   const zy=ty(0).toFixed(1);
-  // Baseline for PnL fill = zero line (or bottom if all positive, top if all negative)
-  const fillBase = (minY>=0) ? (H-P).toFixed(1) : (maxY<=0) ? P.toFixed(1) : zy;
-  // Labels on Y axis
-  const yLabels=[minY,0,maxY].filter((v,i,a)=>a.indexOf(v)===i).map(v=>{
-    const yp=ty(v).toFixed(1);
-    return `<text x="${P+4}" y="${yp}" fill="var(--dim)" font-size="9" font-family="monospace" dy="3">${v>=0?'+':''}${Math.round(v)}</text>`;
+  const fillBase=(minY>=0)?(H-PY).toFixed(1):(maxY<=0)?PY.toFixed(1):zy;
+  // Smooth bezier path
+  const pathD=pts.map((p,j)=>{
+    if(j===0)return 'M '+tx(p.x).toFixed(1)+' '+ty(p.y).toFixed(1);
+    const prev=pts[j-1];
+    const cpx1=(tx(prev.x)+(tx(p.x)-tx(prev.x))*0.5).toFixed(1);
+    const cpx2=(tx(p.x)-(tx(p.x)-tx(prev.x))*0.5).toFixed(1);
+    return 'C '+cpx1+' '+ty(prev.y).toFixed(1)+' '+cpx2+' '+ty(p.y).toFixed(1)+' '+tx(p.x).toFixed(1)+' '+ty(p.y).toFixed(1);
+  }).join(' ');
+  // Grid
+  const gridLines=[0.15,0.4,0.65,0.9].map(r=>{
+    const yp=(PY+r*(H-2*PY)).toFixed(1);
+    const v=minY+(1-r)*totalRng;
+    return '<line x1="'+PX+'" y1="'+yp+'" x2="'+(W-PX)+'" y2="'+yp+'" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>'
+          +'<text x="'+(PX+4)+'" y="'+yp+'" fill="#4a5568" font-size="10" font-family="monospace" dy="-3">'+(v>=0?'+':'')+Math.round(v)+'</text>';
   }).join('');
-  svg.innerHTML=`<defs>
-    <linearGradient id="gradB" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${colB}" stop-opacity="0.20"/>
-      <stop offset="100%" stop-color="${colB}" stop-opacity="0.01"/>
-    </linearGradient>
-    <linearGradient id="gradP" x1="0" y1="${cumPnl>=0?'0':'1'}" x2="0" y2="${cumPnl>=0?'1':'0'}">
-      <stop offset="0%" stop-color="${colP}" stop-opacity="${cumPnl>=0?'0.22':'0.18'}"/>
-      <stop offset="100%" stop-color="${colP}" stop-opacity="0.01"/>
-    </linearGradient>
-  </defs>
-  ${grid}
-  ${zero}
-  <path d="${pathBal} L ${lxB} ${H} L ${tx(0).toFixed(1)} ${H} Z" fill="url(#gradB)"/>
-  <path d="${pathPnl} L ${lxP} ${fillBase} L ${tx(0).toFixed(1)} ${fillBase} Z" fill="url(#gradP)"/>
-  <path d="${pathBal}" fill="none" stroke="${colB}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="6,3"/>
-  <path d="${pathPnl}" fill="none" stroke="${colP}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-  ${yLabels}
-  <circle cx="${lxP}" cy="${lyP}" r="5" fill="${colP}" stroke="var(--bg)" stroke-width="1.5"/>
-  <circle cx="${lxB}" cy="${lyB}" r="4" fill="${colB}" stroke="var(--bg)" stroke-width="1.5"/>`;
+  const zeroLine=(minY<0&&maxY>0)?
+    '<line x1="'+PX+'" y1="'+zy+'" x2="'+(W-PX)+'" y2="'+zy+'" stroke="#6b7a9a" stroke-dasharray="4,4" stroke-width="1" opacity="0.7"/>'+
+    '<text x="'+(PX+4)+'" y="'+zy+'" fill="#6b7a9a" font-size="10" font-family="monospace" dy="-3">$0</text>':'';
+  const labelX=Math.min(parseFloat(lx)+10, W-60);
+  svg.innerHTML='<defs>'
+    +'<linearGradient id="gradPnl" x1="0" y1="0" x2="0" y2="1">'
+    +'<stop offset="0%" stop-color="'+colP+'" stop-opacity="'+(lastPnl>=0?'0.4':'0.3')+'"/>'
+    +'<stop offset="70%" stop-color="'+colP+'" stop-opacity="0.05"/>'
+    +'<stop offset="100%" stop-color="'+colP+'" stop-opacity="0"/>'
+    +'</linearGradient>'
+    +'<filter id="glow"><feGaussianBlur stdDeviation="2.5" result="blur"/>'
+    +'<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
+    +'</defs>'
+    +gridLines+zeroLine
+    +'<path d="'+pathD+' L '+lx+' '+fillBase+' L '+tx(0).toFixed(1)+' '+fillBase+' Z" fill="url(#gradPnl)"/>'
+    +'<path d="'+pathD+'" fill="none" stroke="'+colP+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'
+    +'<circle cx="'+lx+'" cy="'+ly+'" r="5" fill="'+colP+'" stroke="#111827" stroke-width="2" filter="url(#glow)"/>'
+    +'<text x="'+labelX+'" y="'+(parseFloat(ly)+4)+'" fill="'+colP+'" font-size="11" font-family="monospace" font-weight="700">'+(lastPnl>=0?'+':'')+'$'+Math.round(Math.abs(lastPnl))+'</text>';
 }
-
 
 // ── STRATEGY ANALYTICS ────────────────────────────────────────────────
 function renderStrategyAnalysis(filteredTrades) {
@@ -1283,7 +1410,6 @@ function renderStrategyAnalysis(filteredTrades) {
     }).join('');
 }
 
-
 // ── CALENDAR ───────────────────────────────────────────────────────────
 function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
 function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();}
@@ -1291,69 +1417,45 @@ function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalend
 function renderCalendar() {
   const el = document.getElementById('cal-heatmap');
   if (!el) return;
-  el.innerHTML = '';
 
+  // Build dailyPnL with fp-safe accumulation
   const dailyPnL = {};
   trades.forEach(t => {
-    if (!dailyPnL[t.date]) dailyPnL[t.date] = 0;
-    dailyPnL[t.date] += t.pnl;
-  });
-
-  const days = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
-  days.forEach(d => {
-    const div = document.createElement('div');
-    div.className = 'cal-day-header';
-    div.textContent = d;
-    el.appendChild(div);
+    dailyPnL[t.date] = safeAdd(dailyPnL[t.date]||0, t.pnl);
   });
 
   const y = calYear, m = calMonth;
   const firstDay = new Date(y, m, 1).getDay();
   const daysInMonth = new Date(y, m + 1, 0).getDate();
   const todayS = todayStr();
-
   document.getElementById('cal-title').textContent = HE_MONTHS[m] + ' ' + y;
 
+  // Build entire HTML as string — single DOM write
+  const parts = [];
+  ['א','ב','ג','ד','ה','ו','ש'].forEach(d => {
+    parts.push(`<div class="cal-day-header">${d}</div>`);
+  });
   for (let i = 0; i < firstDay; i++) {
-    const div = document.createElement('div');
-    div.className = 'cal-day empty';
-    el.appendChild(div);
+    parts.push('<div class="cal-day empty"></div>');
   }
-
   for (let day = 1; day <= daysInMonth; day++) {
-    const div = document.createElement('div');
-    div.className = 'cal-day';
     const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     const pnl = dailyPnL[dateStr] || 0;
-
-    if (dateStr === todayS) div.style.boxShadow = '0 0 0 2px var(--blue)';
-
-    const dateSpan = document.createElement('span');
-    dateSpan.className = 'cal-date-num';
-    dateSpan.textContent = day;
-    div.appendChild(dateSpan);
-
-    if (pnl !== 0) {
-      div.style.background = pnl > 0 ? 'var(--gd)' : 'var(--rd)';
-      div.style.color = pnl > 0 ? 'var(--green)' : 'var(--red)';
-      div.style.border = `1px solid ${pnl > 0 ? 'rgba(0,214,143,0.3)' : 'rgba(255,61,90,0.3)'}`;
-      div.style.cursor = 'pointer';
-      div.addEventListener('click', (function(ds){ return function(){ openDaySummary(ds); }; })(dateStr));
-
-      const pnlSpan = document.createElement('span');
-      let displayPnl = '';
-      if (Math.abs(pnl) >= 1000) {
-        displayPnl = (pnl / 1000).toFixed(1) + 'K';
-        pnlSpan.className = 'cal-pnl sm';
-      } else {
-        displayPnl = Math.round(pnl).toString();
-        pnlSpan.className = 'cal-pnl';
-      }
-      pnlSpan.textContent = (pnl > 0 ? '+' : '') + displayPnl;
-      div.appendChild(pnlSpan);
+    const isToday = dateStr === todayS;
+    const hasPnl = pnl !== 0;
+    const pnlClass = hasPnl ? (pnl>0 ? 'cal-day-profit' : 'cal-day-loss') : '';
+    const todayClass = isToday ? 'cal-today' : '';
+    const clickAttr = hasPnl ? `onclick="openDaySummary('${dateStr}')"` : '';
+    let pnlHtml = '';
+    if (hasPnl) {
+      const abs = Math.abs(pnl);
+      const display = abs>=1000 ? (pnl/1000).toFixed(1)+'K' : Math.round(pnl).toString();
+      const cls = abs>=1000 ? 'cal-pnl sm' : 'cal-pnl';
+      pnlHtml = `<span class="${cls}">${pnl>0?'+':''}${display}</span>`;
     }
-    el.appendChild(div);
+    parts.push(`<div class="cal-day ${pnlClass} ${todayClass}" ${clickAttr}><span class="cal-date-num">${day}</span>${pnlHtml}</div>`);
   }
+  el.innerHTML = parts.join(''); // Single DOM write
 }
 
 // ── JOURNAL ────────────────────────────────────────────────────────────
@@ -1392,6 +1494,7 @@ function renderJournal(){
       <td style="white-space:nowrap">
         <button class="act-btn" onclick="openEditModal(${t.id})" title="ערוך">✏️</button>
         <button class="act-btn del" onclick="deleteTrade(${t.id})" title="מחק">✕</button>
+        <button class="ai-trade-btn" onclick="analyzeTradeAI(${t.id},this)" title="ניתוח AI">✨</button>
       </td>
     </tr>`).join('')
     :`<tr><td colspan="11" class="empty">אין עסקאות מתאימות</td></tr>`;
@@ -1417,6 +1520,7 @@ function renderJournal(){
           <div class="tc-actions">
             <button class="act-btn" onclick="openEditModal(${t.id})">✏️</button>
             <button class="act-btn del" onclick="deleteTrade(${t.id})">✕</button>
+            <button class="ai-trade-btn" onclick="analyzeTradeAI(${t.id},this)">✨ AI</button>
           </div>
         </div>`:
         `<div class="tc-actions" style="justify-content:flex-start">
@@ -1430,22 +1534,157 @@ function deleteTrade(id){trades=trades.filter(t=>t.id!==id);saveTradesToStorage(
 
 // ── STATISTICS ─────────────────────────────────────────────────────────
 function statRow(ts){const w=ts.filter(t=>t.pnl>0).length,l=ts.filter(t=>t.pnl<=0).length,pnl=ts.reduce((a,t)=>a+t.pnl,0);return{w,l,wr:safeDiv(w*100,ts.length),pnl};}
+
+// ── PERIOD COMPARISON ──────────────────────────────────────────────────
+let comparePeriod = 'week';
+
+function setComparePeriod(p){
+  comparePeriod = p;
+  ['week','month','quarter'].forEach(x=>{
+    const btn=document.getElementById('cmp-'+x+'-btn');
+    if(btn) btn.classList.toggle('on', x===p);
+  });
+  renderComparison();
+}
+
+function getComparePeriodDates(period, offset=0){
+  const now = new Date();
+  let from, to, label;
+  if(period === 'week'){
+    const day = now.getDay(); // 0=Sun
+    const thisMon = new Date(now); thisMon.setDate(now.getDate() - ((day+6)%7));
+    const thisSun = new Date(thisMon); thisSun.setDate(thisMon.getDate() + 6);
+    const f = new Date(thisMon); f.setDate(thisMon.getDate() - offset*7);
+    const t = new Date(thisSun); t.setDate(thisSun.getDate() - offset*7);
+    from=fmtDate(f); to=fmtDate(t);
+    label = offset===0 ? 'שבוע נוכחי' : 'שבוע קודם';
+  } else if(period === 'month'){
+    const y = now.getFullYear(), m = now.getMonth() - offset;
+    const d = new Date(y, m, 1);
+    from = fmtDate(new Date(d.getFullYear(), d.getMonth(), 1));
+    to   = fmtDate(new Date(d.getFullYear(), d.getMonth()+1, 0));
+    label = offset===0 ? 'חודש נוכחי' : 'חודש קודם';
+  } else { // quarter
+    const q = Math.floor(now.getMonth()/3) - offset;
+    const baseY = now.getFullYear() + Math.floor(q/4);
+    const baseQ = ((q % 4) + 4) % 4;
+    from = fmtDate(new Date(baseY, baseQ*3, 1));
+    to   = fmtDate(new Date(baseY, baseQ*3+3, 0));
+    label = offset===0 ? 'רבעון נוכחי' : 'רבעון קודם';
+  }
+  return {from, to, label};
+}
+
+function fmtDate(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function calcPeriodStats(from, to){
+  const ts = trades.filter(t => t.date >= from && t.date <= to);
+  if(!ts.length) return null;
+  const wins = ts.filter(t=>t.pnl>0);
+  const pnl = safeSum(ts.map(t=>t.pnl));
+  const wr = safeDiv(wins.length*100, ts.length);
+  const avg = safeDiv(pnl, ts.length);
+  const days = [...new Set(ts.map(t=>t.date))].length;
+  const avgDay = safeDiv(pnl, days);
+  return {ts, wins, pnl, wr, avg, days, avgDay, count:ts.length};
+}
+
+function renderComparePeriodCol(el, stats, label, isCurrentPeriod){
+  if(!el) return;
+  if(!stats){
+    el.innerHTML = '<div class="compare-col-title">'+label+'</div><div style="text-align:center;color:var(--dim);font-size:11px;padding:16px">אין עסקאות</div>';
+    return;
+  }
+  const pnlCls = stats.pnl>=0?'pnl-positive':'pnl-negative';
+  el.innerHTML = '<div class="compare-col-title">'+(isCurrentPeriod?'🔵 ':'⚪ ')+label+'</div>'
+    +'<div class="compare-stat"><span class="compare-stat-lbl">רווח/הפסד</span><span class="compare-stat-val '+pnlCls+'">'+fmt(stats.pnl)+'</span></div>'
+    +'<div class="compare-stat"><span class="compare-stat-lbl">עסקאות</span><span class="compare-stat-val">'+stats.count+'</span></div>'
+    +'<div class="compare-stat"><span class="compare-stat-lbl">% הצלחה</span><span class="compare-stat-val '+(stats.wr>=50?'pnl-positive':'pnl-negative')+'">'+f2(stats.wr,1)+'%</span></div>'
+    +'<div class="compare-stat"><span class="compare-stat-lbl">ממוצע/עסקה</span><span class="compare-stat-val '+(stats.avg>=0?'pnl-positive':'pnl-negative')+'">'+fmt(stats.avg)+'</span></div>'
+    +'<div class="compare-stat"><span class="compare-stat-lbl">ימי מסחר</span><span class="compare-stat-val">'+stats.days+'</span></div>'
+    +'<div class="compare-stat"><span class="compare-stat-lbl">ממוצע/יום</span><span class="compare-stat-val '+(stats.avgDay>=0?'pnl-positive':'pnl-negative')+'">'+fmt(stats.avgDay)+'</span></div>';
+}
+
+function renderComparisonDelta(curr, prev){
+  const el = document.getElementById('cmp-delta');
+  if(!el) return;
+  if(!curr||!prev){
+    el.innerHTML='<div style="color:var(--dim);font-size:11px;text-align:center;grid-column:1/-1">אין מספיק נתונים להשוואה</div>';
+    return;
+  }
+  const items = [
+    {lbl:'רווח/הפסד', curr:curr.pnl, prev:prev.pnl, fmt:v=>fmt(v), pct:true},
+    {lbl:'% הצלחה', curr:curr.wr, prev:prev.wr, fmt:v=>f2(v,1)+'%', pct:false},
+    {lbl:'עסקאות', curr:curr.count, prev:prev.count, fmt:v=>v, pct:false},
+  ];
+  el.innerHTML = items.map(item=>{
+    const diff = safeSub(item.curr, item.prev);
+    const pctChg = item.pct && prev.pnl !== 0 ? safeDiv(diff*100, Math.abs(item.prev)) : null;
+    const up = diff > 0;
+    const neutral = Math.abs(diff) < 0.01;
+    const cls = neutral?'neutral':up?'up':'down';
+    const arrow = neutral?'—':up?'▲':'▼';
+    const display = pctChg !== null ? (up?'+':'')+f2(pctChg,1)+'%' : (up?'+':'')+item.fmt(diff);
+    return '<div class="compare-delta-item">'
+      +'<div class="compare-delta-lbl">'+item.lbl+'</div>'
+      +'<div class="compare-delta-val '+cls+'">'+arrow+' '+display+'</div>'
+      +'</div>';
+  }).join('');
+}
+
+function renderComparison(){
+  const curr = getComparePeriodDates(comparePeriod, 0);
+  const prev = getComparePeriodDates(comparePeriod, 1);
+  const currStats = calcPeriodStats(curr.from, curr.to);
+  const prevStats = calcPeriodStats(prev.from, prev.to);
+  renderComparePeriodCol(document.getElementById('cmp-current'), currStats, curr.label, true);
+  renderComparePeriodCol(document.getElementById('cmp-previous'), prevStats, prev.label, false);
+  renderComparisonDelta(currStats, prevStats);
+}
+
 function renderStats(){
   daysShown=DAYS_PER_PAGE;
+  renderComparison();
   const ft=filteredTrades();const mm={},dm={},hm={},tm={};
   ft.forEach(t=>{const mo=t.date.slice(0,7);(mm[mo]=mm[mo]||[]).push(t);(dm[t.date]=dm[t.date]||[]).push(t);const h=(t.time||'09:00').slice(0,2);(hm[h]=hm[h]||[]).push(t);(t.tags||[]).forEach(tag=>{(tm[tag]=tm[tag]||[]).push(t);});});
   document.getElementById('stat-month').innerHTML=Object.entries(mm).sort((a,b)=>b[0]<a[0]?-1:1).map(([m,ts])=>{const days=[...new Set(ts.map(t=>t.date))].length,{w,l,wr,pnl}=statRow(ts);return`<tr><td class="bold">${m}</td><td>${days}</td><td>${ts.length}</td><td class="g">${w}</td><td class="r">${l}</td><td class="${classOf(wr-50)}">${f2(wr,1)}%</td><td class="mn ${classOf(pnl)}">${fmt(pnl)}</td><td class="mn ${classOf(safeDiv(pnl,days))}">${fmt(safeDiv(pnl,days))}</td></tr>`;}).join('')||`<tr><td colspan="8" class="empty">אין נתונים</td></tr>`;
   allDayEntries=Object.entries(dm).sort((a,b)=>b[0]<a[0]?-1:1);
   renderDayRows();
-  // Hours — highlight best and worst
+  // Hours — visual bar chart
   const hourEntries=Object.entries(hm).sort((a,b)=>a[0]<b[0]?-1:1);
-  const hourPnls=hourEntries.map(([,ts])=>ts.reduce((a,t)=>a+t.pnl,0));
-  const maxHPnl=Math.max(...hourPnls),minHPnl=Math.min(...hourPnls);
-  document.getElementById('stat-hour').innerHTML=hourEntries.map(([h,ts])=>{
-    const{w,l,wr,pnl}=statRow(ts);
-    const rowCls=pnl===maxHPnl&&hourPnls.length>1?'hour-best':pnl===minHPnl&&hourPnls.length>1?'hour-worst':'';
-    return`<tr class="${rowCls}"><td class="mn go">${h}:00</td><td>${ts.length}</td><td class="g">${w}</td><td class="r">${l}</td><td class="${classOf(wr-50)}">${f2(wr,1)}%</td><td class="mn ${classOf(pnl)}">${fmt(pnl)}</td><td><button class="act-btn" onclick="openHourSummary('${h}')" title="פירוט">🔍</button></td></tr>`;
-  }).join('')||`<tr><td colspan="7" class="empty">אין נתונים</td></tr>`;
+  const hourPnls=hourEntries.map(([,ts])=>safeSum(ts.map(t=>t.pnl)));
+  const maxHPnl=hourPnls.length?Math.max(...hourPnls):0;
+  const minHPnl=hourPnls.length?Math.min(...hourPnls):0;
+  const maxAbs=Math.max(...hourPnls.map(Math.abs),1);
+  const hourEl=document.getElementById('hour-chart');
+  if(!hourEntries.length){hourEl.innerHTML='<div class="empty" style="padding:16px">אין נתונים</div>';}
+  else{
+    // Build using DOM to avoid quote escaping issues
+      const frag=document.createDocumentFragment();
+      hourEntries.forEach(([h,ts])=>{
+        const{w,l,wr,pnl}=statRow(ts);
+        const isBest=pnl===maxHPnl&&hourPnls.length>1;
+        const isWorst=pnl===minHPnl&&hourPnls.length>1;
+        const barW=safeDiv(Math.abs(pnl)*100,maxAbs);
+        const fillCls=isBest?'best':isWorst?'worst':pnl>=0?'positive':'negative';
+        const icon=isBest?'⭐ ':isWorst?'☠ ':'';
+        const pnlTxt=Math.abs(pnl)>=100?fmt(pnl):'';
+        const row=document.createElement('div');row.className='hour-bar-row';
+        const lbl=document.createElement('div');lbl.className='hour-bar-label';lbl.textContent=h+':00';
+        const track=document.createElement('div');track.className='hour-bar-track';track.style.cursor='pointer';
+        track.addEventListener('click',()=>openHourSummary(h));
+        const fill=document.createElement('div');fill.className='hour-bar-fill '+fillCls;
+        fill.style.width=barW.toFixed(1)+'%';fill.textContent=icon+pnlTxt;
+        track.appendChild(fill);
+        const meta=document.createElement('div');meta.className='hour-bar-meta';
+        meta.innerHTML='<span class="'+(pnl>=0?'pnl-positive':'pnl-negative')+'">'+fmt(pnl)+'</span><br><span class="cnt">'+ts.length+' עסקאות · '+f2(wr,0)+'%</span>';
+        row.appendChild(lbl);row.appendChild(track);row.appendChild(meta);
+        frag.appendChild(row);
+      });
+      hourEl.innerHTML='';hourEl.appendChild(frag);
+  }
   renderTagChart(tm);
 }
 function renderDayRows(){
@@ -1463,8 +1702,6 @@ function renderTagChart(tm){
 }
 
 // ── PSYCHOLOGY ─────────────────────────────────────────────────────────
-
-
 
 // ── BACKUP MODAL ───────────────────────────────────────────────────────
 function openBackupModal(){
@@ -1498,7 +1735,7 @@ function doBackup(){
   localStorage.setItem('tradeflow_last_backup', now);
   const el=document.getElementById('backup-last-time');
   if(el) el.textContent=`גיבוי אחרון: ${now}`;
-  showToast('💾 גיבוי הורד בהצלחה!','var(--green)');
+  showToast('💾 גיבוי הורד בהצלחה!','profit');
 }
 
 function doRestore(){
@@ -1507,10 +1744,10 @@ function doRestore(){
 
 function doExportCSV(){
   exportAll();
-  showToast('📊 CSV ייוצא בהצלחה!','var(--blue)');
+  showToast('📊 CSV ייוצא בהצלחה!','info');
 }
 
-async function backupToDriveNow(){
+async function backupToDriveNow_OLD(){
   const clientId=localStorage.getItem(GDRIVE_KEY)||'';
   if(!clientId){closeBackupModal();openSettings();return;}
   if(!gDriveIsConnected()){gDriveAuth();return;}
@@ -1520,21 +1757,146 @@ async function backupToDriveNow(){
   if(btn) btn.disabled=true;
   await gDriveUpload(buildBackupData());
   if(title) title.textContent='✅ הועלה בהצלחה!';
-  showToast('☁️ הגיבוי עלה ל-Drive!','var(--green)');
+  showToast('☁️ הגיבוי עלה ל-Drive!','profit');
   setTimeout(()=>{
     if(title) title.textContent='גבה ל-Google Drive';
     if(btn) btn.disabled=false;
   },3000);
 }
 
-function showToast(msg, color='var(--green)'){
+function showToast(msg, type='profit'){
   const t=document.getElementById('auto-backup-toast');
   if(!t)return;
   t.textContent=msg;
-  t.style.borderColor=color;
-  t.style.color=color;
-  t.classList.add('show');
+  t.className='auto-backup-toast toast-'+type+' show';
   setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── JSONBIN CLOUD SYNC ─────────────────────────────────────────────────
+let _syncTimer = null;
+let _syncState = 'idle'; // idle | syncing | synced | error
+
+function getJsonbinCreds(){
+  return{
+    key: localStorage.getItem(JSONBIN_KEY_K)||'',
+    bin: localStorage.getItem(JSONBIN_BIN_K)||''
+  };
+}
+
+function setSyncState(state, msg=''){
+  _syncState = state;
+  const dot = document.getElementById('sync-dot');
+  const lbl = document.getElementById('sync-label');
+  if(!dot||!lbl) return;
+  dot.className = 'sync-dot ' + (state==='synced'?'synced':state==='syncing'?'syncing':state==='error'?'error':'');
+  if(state==='syncing') lbl.textContent='מסנכרן...';
+  else if(state==='synced'){
+    const t=new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'});
+    lbl.textContent='סונכרן '+t;
+  }
+  else if(state==='error') lbl.textContent='שגיאת סנכרון';
+  else lbl.textContent='ענן';
+}
+
+// Debounced auto-sync — called after every data change
+function scheduleSynce(){
+  const{key,bin}=getJsonbinCreds();
+  if(!key||!bin) return; // not configured
+  if(_syncTimer) clearTimeout(_syncTimer);
+  setSyncState('syncing');
+  _syncTimer=setTimeout(()=>syncToCloud(),30000); // 30s debounce
+}
+
+async function syncToCloud(){
+  const{key,bin}=getJsonbinCreds();
+  if(!key||!bin){setSyncState('idle');return;}
+  setSyncState('syncing');
+  try{
+    const payload={
+      version:3,
+      syncedAt:new Date().toISOString(),
+      trades,
+      transactions,
+      taxPayments,
+      settings
+    };
+    const res=await fetch(`https://api.jsonbin.io/v3/b/${bin}`,{
+      method:'PUT',
+      headers:{
+        'Content-Type':'application/json',
+        'X-Master-Key':key
+      },
+      body:JSON.stringify(payload)
+    });
+    if(!res.ok){
+      const err=await res.json().catch(()=>({}));
+      throw new Error(err.message||'HTTP '+res.status);
+    }
+    localStorage.setItem(JSONBIN_SYNC_K, new Date().toISOString());
+    setSyncState('synced');
+    updateJsonbinSettingsStatus();
+    console.log('[JSONBin] Sync OK');
+  }catch(e){
+    setSyncState('error');
+    console.error('[JSONBin] Sync failed:',e.message);
+  }
+}
+
+async function manualSync(){
+  if(_syncTimer){clearTimeout(_syncTimer);_syncTimer=null;}
+  await syncToCloud();
+  const {key,bin}=getJsonbinCreds();
+  if(!key||!bin){
+    showToast('⚙️ הגדר API Key ו-Bin ID בהגדרות','info');
+    openSettings();
+  } else {
+    showToast('☁️ סונכרן בהצלחה!','profit');
+  }
+}
+
+async function loadFromCloud(){
+  const{key,bin}=getJsonbinCreds();
+  if(!key||!bin) return false;
+  try{
+    const res=await fetch(`https://api.jsonbin.io/v3/b/${bin}/latest`,{
+      headers:{'X-Master-Key':key,'X-Bin-Meta':false}
+    });
+    if(!res.ok) return false;
+    const data=await res.json();
+    if(!data.trades||!Array.isArray(data.trades)) return false;
+    // Only load if cloud is newer than local
+    const cloudDate=new Date(data.syncedAt||0);
+    const localSyncStr=localStorage.getItem(JSONBIN_SYNC_K);
+    const localDate=localSyncStr?new Date(localSyncStr):new Date(0);
+    if(cloudDate>localDate){
+      trades=data.trades; saveTradesToStorage(trades);
+      if(data.transactions){transactions=data.transactions;saveTxToStorage(transactions);}
+      if(data.taxPayments){taxPayments=data.taxPayments;saveTaxPayments();}
+      if(data.settings){settings={...settings,...data.settings};saveSettingsToStorage();}
+      localStorage.setItem(JSONBIN_SYNC_K,data.syncedAt);
+      console.log('[JSONBin] Loaded from cloud — '+data.trades.length+' trades');
+      return true;
+    }
+    return false;
+  }catch(e){
+    console.warn('[JSONBin] Load failed:',e.message);
+    return false;
+  }
+}
+
+function updateJsonbinSettingsStatus(){
+  const el=document.getElementById('jsonbin-settings-status');
+  if(!el) return;
+  const{key,bin}=getJsonbinCreds();
+  if(!key&&!bin){el.textContent='לא מוגדר';el.className='jsonbin-status';}
+  else if(!key){el.textContent='⚠ חסר API Key';el.className='jsonbin-status err';}
+  else if(!bin){el.textContent='⚠ חסר Bin ID';el.className='jsonbin-status err';}
+  else{
+    const last=localStorage.getItem(JSONBIN_SYNC_K);
+    const lastStr=last?new Date(last).toLocaleString('he-IL'):'טרם סונכרן';
+    el.textContent=`✓ מוגדר — סנכרון אחרון: ${lastStr}`;
+    el.className='jsonbin-status ok';
+  }
 }
 
 // ── AUTO BACKUP ────────────────────────────────────────────────────────
@@ -1545,30 +1907,6 @@ function updateAutoBackupStatus(){
   if(!el)return;
   if(every===0){el.textContent='כבוי — הכנס מספר להפעלה';el.className='backup-status';}
   else{el.textContent=`✓ פעיל — גיבוי אוטומטי כל ${every} עסקאות`;el.className='backup-status ok';}
-}
-
-// ── GOOGLE DRIVE ────────────────────────────────────────────────────────
-let gDriveToken=null;
-let gDriveConnected=false;
-
-function gDriveIsConnected(){return gDriveConnected&&gDriveToken;}
-
-function updateGDriveStatus(){
-  const val=document.getElementById('s-gdrive-client-id').value.trim();
-  const statusEl=document.getElementById('gdrive-status');
-  const authBtn=document.getElementById('gdrive-auth-btn');
-  const backupBtn=document.getElementById('gdrive-backup-now-btn');
-  if(!statusEl)return;
-  if(!val){
-    statusEl.textContent='הזן Client ID להפעלה';statusEl.className='backup-status';
-    authBtn.style.display='none';backupBtn.style.display='none';
-  } else if(gDriveConnected){
-    statusEl.textContent='✓ מחובר ל-Google Drive';statusEl.className='backup-status ok';
-    authBtn.style.display='none';backupBtn.style.display='flex';
-  } else {
-    statusEl.textContent='לא מחובר — לחץ להתחברות';statusEl.className='backup-status';
-    authBtn.style.display='flex';backupBtn.style.display='none';
-  }
 }
 
 function gDriveAuth(){
@@ -1628,6 +1966,74 @@ async function gDriveBackupNow(){
 }
 
 // ── AI INSIGHTS ────────────────────────────────────────────────────────
+
+// ── AI TRADE ANALYSIS ──────────────────────────────────────────────────
+async function analyzeTradeAI(id, btn){
+  const apiKey=localStorage.getItem(API_KEY_KEY)||'';
+  if(!apiKey){showToast('⚙️ הגדר מפתח AI בהגדרות','info');openSettings();return;}
+
+  const t=trades.find(t=>t.id===id);
+  if(!t) return;
+
+  // Find or create result container
+  const card=btn.closest('.trade-card');
+  if(!card) return;
+  let resultEl=card.querySelector('.ai-trade-result');
+  if(!resultEl){
+    resultEl=document.createElement('div');
+    resultEl.className='ai-trade-result';
+    card.appendChild(resultEl);
+  }
+
+  btn.disabled=true;btn.textContent='⏳';
+  resultEl.innerHTML='<div class="ai-tr-loading">מנתח עסקה...</div>';
+
+  // Context: last 10 trades for comparison
+  const recent=[...trades].sort((a,b)=>b.date<a.date?-1:1).slice(0,10);
+  const avgPnl=safeDiv(safeSum(recent.map(r=>r.pnl)),recent.length);
+  const wr=safeDiv(recent.filter(r=>r.pnl>0).length*100,recent.length);
+
+  const prompt=`אתה מאמן מסחר מקצועי. נתח את העסקה הבאה בקצרה (3-4 משפטים בעברית).
+
+עסקה:
+- סמל: ${t.symbol}
+- כיוון: ${t.dir}
+- כניסה: $${f2(t.entry)} | יציאה: $${f2(t.exit)} | כמות: ${t.size}
+- רווח/הפסד: ${fmt(t.pnl)} (${f2(t.pct)}%)
+- מצב מנטלי: ${t.mental||'לא צוין'}
+- אסטרטגיות: ${(t.tags||[]).join(', ')||'לא צוין'}
+- הערות: ${t.notes||'אין'}
+
+הקשר (10 עסקאות אחרונות):
+- ממוצע רווח/עסקה: ${fmt(avgPnl)}
+- אחוז הצלחה: ${f2(wr,1)}%
+
+החזר JSON בלבד:
+{"score":"good/ok/bad","scoreLabel":"ניצחון מצוין/בסדר/הפסד נמנע","analysis":"ניתוח קצר 2-3 משפטים","lesson":"לקח אחד קצר"}`;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:400,messages:[{role:'user',content:prompt}]})
+    });
+    const data=await res.json();
+    if(data.error) throw new Error(data.error.message);
+    const raw=data.content.map(b=>b.text||'').join('');
+    const clean=raw.replace(/```json|```/g,'').trim();
+    const parsed=JSON.parse(clean);
+    resultEl.innerHTML=
+      '<div class="ai-tr-header">✨ ניתוח Claude AI</div>'
+      +'<span class="ai-tr-score '+parsed.score+'">'+parsed.scoreLabel+'</span>'
+      +'<div>'+parsed.analysis+'</div>'
+      +'<div style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border);font-size:11px;color:var(--gold)">💡 '+parsed.lesson+'</div>';
+    btn.textContent='✨ AI';btn.disabled=false;
+  }catch(e){
+    resultEl.innerHTML='<div style="color:var(--red);font-size:11px">שגיאה: '+e.message+'</div>';
+    btn.textContent='✨ AI';btn.disabled=false;
+  }
+}
+
 async function generateAIInsights(){
   const btn=document.getElementById('ai-btn');
   const content=document.getElementById('ai-content');
@@ -1720,7 +2126,7 @@ async function generateAIInsights(){
       method:'POST',
       headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-haiku-4-5-20251001',
         max_tokens:1500,
         messages:[{role:'user',content:prompt}]
       })
@@ -1797,9 +2203,9 @@ function openSettings(){
   document.getElementById('s-api-key').value=savedKey;
   document.getElementById('s-auto-backup').value=settings.autoBackupEvery||0;
   updateAutoBackupStatus();
-  const gdClientId=localStorage.getItem(GDRIVE_KEY)||'';
-  document.getElementById('s-gdrive-client-id').value=gdClientId;
-  updateGDriveStatus();
+  document.getElementById('s-jsonbin-key').value=localStorage.getItem(JSONBIN_KEY_K)||'';
+  document.getElementById('s-jsonbin-bin').value=localStorage.getItem(JSONBIN_BIN_K)||'';
+  updateJsonbinSettingsStatus();
   updateApiKeyStatus();
   document.getElementById('settings-overlay').classList.add('open');
 }
@@ -1827,9 +2233,11 @@ function saveSettings(){
   settings.warnPct=parseFloat(document.getElementById('s-warn-pct').value)||70;
   settings.autoBackupEvery=parseInt(document.getElementById('s-auto-backup').value)||0;
   saveSettingsToStorage();
-  const gdClientId=document.getElementById('s-gdrive-client-id').value.trim();
-  if(gdClientId) localStorage.setItem(GDRIVE_KEY,gdClientId);
-  else localStorage.removeItem(GDRIVE_KEY);
+  const jbKey=document.getElementById('s-jsonbin-key').value.trim();
+  const jbBin=document.getElementById('s-jsonbin-bin').value.trim();
+  if(jbKey) localStorage.setItem(JSONBIN_KEY_K,jbKey); else localStorage.removeItem(JSONBIN_KEY_K);
+  if(jbBin) localStorage.setItem(JSONBIN_BIN_K,jbBin); else localStorage.removeItem(JSONBIN_BIN_K);
+  updateJsonbinSettingsStatus();
   const apiKey=document.getElementById('s-api-key').value.trim();
   if(apiKey) localStorage.setItem(API_KEY_KEY,apiKey);
   else localStorage.removeItem(API_KEY_KEY);
@@ -1839,8 +2247,8 @@ function saveSettings(){
 // ── WALLET ─────────────────────────────────────────────────────────────
 function walletCalc(){
   // הפקדות/משיכות תמיד מחושבות על הכל
-  const deps=transactions.filter(t=>t.type==='הפקדה').reduce((a,t)=>a+t.amount,0);
-  const wths=transactions.filter(t=>t.type==='משיכה').reduce((a,t)=>a+t.amount,0);
+  const deps=safeSum(transactions.filter(t=>t.type==='הפקדה').map(t=>t.amount));
+  const wths=safeSum(transactions.filter(t=>t.type==='משיכה').map(t=>t.amount));
   const netDeposits=deps-wths;
   // רווח לפי הפילטר הפעיל
   const ft=filteredTrades();
@@ -1939,13 +2347,12 @@ function tryTaxSave(){
 }
 document.getElementById('tax-modal').addEventListener('keydown',e=>{if(e.key==='Enter')tryTaxSave();});
 
-
 // ── TX MODAL ───────────────────────────────────────────────────────────
 function openTxModal(){activeTxType='הפקדה';setTxType('הפקדה');document.getElementById('tx-amount').value='';document.getElementById('tx-date').value=new Date().toISOString().slice(0,10);document.getElementById('tx-notes').value='';document.getElementById('tx-err').classList.remove('show');document.getElementById('tx-save-btn').disabled=true;document.getElementById('tx-overlay').classList.add('open');setTimeout(()=>document.getElementById('tx-amount').focus(),100);}
 function closeTxModal(){document.getElementById('tx-overlay').classList.remove('open');}
 function setTxType(type){activeTxType=type;document.getElementById('tx-btn-dep').classList.toggle('on',type==='הפקדה');document.getElementById('tx-btn-wit').classList.toggle('on',type==='משיכה');validateTx();}
 function validateTx(){const amt=parseFloat(document.getElementById('tx-amount').value),errEl=document.getElementById('tx-err'),saveBtn=document.getElementById('tx-save-btn');errEl.classList.remove('show');if(!amt||amt<=0){saveBtn.disabled=true;return false;}if(activeTxType==='משיכה'){const{grossBal}=walletCalc();if(amt>grossBal){errEl.textContent=`לא ניתן למשוך יותר מהיתרה (${fmt(grossBal)})`;errEl.classList.add('show');saveBtn.disabled=true;return false;}}saveBtn.disabled=false;return true;}
-function tryTxSave(){if(!validateTx())return;transactions.unshift({id:Date.now(),type:activeTxType,amount:parseFloat(document.getElementById('tx-amount').value),date:document.getElementById('tx-date').value,notes:document.getElementById('tx-notes').value.trim()});saveTxToStorage(transactions);closeTxModal();renderWallet();}
+function tryTxSave(){if(!validateTx())return;const txAmt=parseFloat(document.getElementById('tx-amount').value);if(!isFinite(txAmt)||isNaN(txAmt)||txAmt<=0){console.error('[tryTxSave] Invalid amount',txAmt);alert('סכום לא תקין');return;}transactions.unshift({id:Date.now(),type:activeTxType,amount:txAmt,date:document.getElementById('tx-date').value,notes:document.getElementById('tx-notes').value.trim()});saveTxToStorage(transactions);closeTxModal();renderWallet();}
 document.getElementById('tx-modal').addEventListener('keydown',e=>{if(e.key==='Enter'&&document.activeElement.tagName!=='TEXTAREA')tryTxSave();});
 
 // ── WIZARD MODAL ───────────────────────────────────────────────────────
@@ -1957,7 +2364,7 @@ function openModal(prefillDate=null){
   document.getElementById('f-date').value=prefillDate||now.toISOString().slice(0,10);
   document.getElementById('f-time').value=now.toTimeString().slice(0,5);
   document.getElementById('pnl-display').textContent='ממתין לנתונים...';
-  document.getElementById('pnl-display').style.color='var(--dim)';
+  document.getElementById('pnl-display').className='pnl-display text-neutral';
   document.getElementById('err-step1').classList.remove('show');
   activeDir='לונג';setDir('לונג');activeStar=0;setStar(0);activeTags=new Set();
   buildTagSelectors();_updateWizard();
@@ -2012,14 +2419,24 @@ function validate(){
 function calcPnl(){
   const e=parseFloat(document.getElementById('f-entry').value),x=parseFloat(document.getElementById('f-exit').value),s=parseFloat(document.getElementById('f-size').value),el=document.getElementById('pnl-display');
   if(!e||!x||!s||e<=0||x<=0||s<=0){el.textContent='ממתין לנתונים...';el.style.color='var(--dim)';return;}
-  const pnl=activeDir==='לונג'?(x-e)*s:(e-x)*s,pct=activeDir==='לונג'?((x-e)/e)*100:((e-x)/e)*100;
-  el.textContent=`${fmt(pnl)}  (${f2(pct)}%)`;el.style.color=colorOf(pnl);
+  const rawDiff=activeDir==='לונג'?safeSub(x,e):safeSub(e,x);
+  const pnl=safeMul(rawDiff,s);
+  const pct=safeDiv(rawDiff*100,e);
+  el.textContent=`${fmt(pnl)}  (${f2(pct)}%)`;el.className='pnl-display '+(pnl>=0?'pnl-positive':'pnl-negative');
 }
 
 function trySave(){
   if(!validate())return;
   const e=parseFloat(document.getElementById('f-entry').value),x=parseFloat(document.getElementById('f-exit').value),s=parseFloat(document.getElementById('f-size').value);
-  const pnl=activeDir==='לונג'?(x-e)*s:(e-x)*s,pct=activeDir==='לונג'?((x-e)/e)*100:((e-x)/e)*100;
+  const rawDiff=activeDir==='לונג'?safeSub(x,e):safeSub(e,x);
+  const pnl=safeMul(rawDiff,s);
+  const pct=safeDiv(rawDiff*100,e);
+  // NaN guard — production financial safety
+  if(!isFinite(pnl)||!isFinite(pct)||isNaN(pnl)){
+    console.error('[trySave] Invalid PnL calculation',{e,x,s,pnl,pct});
+    alert('שגיאת חישוב — ודא שכל הערכים מספריים ותקינים');
+    return;
+  }
   const td={symbol:document.getElementById('f-symbol').value.trim(),dir:activeDir,entry:e,exit:x,size:s,date:document.getElementById('f-date').value,time:document.getElementById('f-time').value,pnl,pct,notes:document.getElementById('f-notes').value.trim(),tags:[...activeTags],mental:activeStar||null};
   if(editingId){const idx=trades.findIndex(t=>t.id===editingId);if(idx>=0)trades[idx]={...trades[idx],...td};}
   else trades.unshift({id:Date.now(),...td});
@@ -2033,7 +2450,13 @@ document.getElementById('modal').addEventListener('keydown',e=>{
 });
 
 // ── INIT ───────────────────────────────────────────────────────────────
-renderAll();
+(async()=>{
+  setSyncState('syncing');
+  const loaded=await loadFromCloud();
+  setSyncState(loaded?'synced':'idle');
+  updateJsonbinSettingsStatus();
+  renderAll();
+})();
 </script>
 </body>
 </html>
